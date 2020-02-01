@@ -2,12 +2,13 @@ import pandas as pd
 from corextopic import corextopic as ct
 from corextopic import vis_topic as vt
 import pickle
+import logging
 import numpy as numpy
 import os
 from datetime import datetime
 import logging
 from abc import ABC, abstractmethod
-from utils.funcs import set_anchor_words
+from hashtagger.utils.funcs import set_anchor_words
 
 
 logging.basicConfig(
@@ -83,7 +84,7 @@ class semiSuperviserTrainer(modelTrainer):
     """train your wicked semi supervised corex model"""
     def __init__(self, words=DataProcessor.vocabulary, doc_words=DataProcessor.doc_words,
                  n_topic=50, save_model=True, model_directory='model/', print_words=True, 
-                 anchor_strengh=6, anchor_path='./anchor_words.json'):
+                 anchor_strengh=6, anchor_path='../anchor_words.json'):
         modelTrainer.__init__(
             words=words, doc_words=doc_words,
             n_topic=n_topic, save_model=save_model,

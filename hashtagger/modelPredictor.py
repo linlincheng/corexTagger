@@ -1,10 +1,17 @@
 import pandas as pd
-from utils.funcs import clean_text, sparse_hot_encoder
+import logging
+from hashtagger.utils.funcs import clean_text, sparse_hot_encoder
 
+logging.basicConfig(
+    format='%(asctime)s [%(filename)s:%(lineno)d] %(message)s',
+    datefmt='%d-%m-%Y:%H:%M:%S',
+    level=logging.INFO
+    )
+log = logging.getLogger('modelPredictor)
 
-class corexModelPreditor():
+class modelPreditor():
     "modelPredictors predict your tag for you"
-    def __init__(self, text_data, model_directory):
+    def __init__(self, text_data, model_directory='./model'):
         # check text_data class
         if isinstance(text_data, str):
             text_data = [text_data]
