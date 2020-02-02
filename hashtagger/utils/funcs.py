@@ -1,5 +1,6 @@
 # your useful helper collection
 from sklearn.feature_extraction.text import CountVectorizer
+from hashtagger.utils.lemmatizer import lemmatize_sentence
 import scipy.sparse as ss
 import string
 import logging
@@ -25,12 +26,11 @@ def clean_text(data_list):  # make sure to force string as list when running one
     # set lemmatizer
     lemmatizer = WordNetLemmatizer()
     for text in data_list:
-        #  remove punctuations and tokenize
-        text.translate(str.maketrans('', '', string.punctuation))
         # lemmatize, lower case and remove digits
-        text = ''.join([lemmatizer.lemmatize(word) if not word.isdigit() else
-                        'NUM' for word in text])
-        clean_data_list.append(text)
+        #  remove punctuations and tokenize
+        text.translate(str.maketrans('', '', string.punctuation)).lower()
+        processed_text = lemmatize_sentence(sentence=text)
+        clean_data_list.append(processed_text)
     return(clean_data_list)
 
 
