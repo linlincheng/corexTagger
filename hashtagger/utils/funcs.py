@@ -6,6 +6,8 @@ import logging
 import numpy as np
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import RegexpTokenizer
+import json
+from collections import OrderedDict
 
 logging.basicConfig(
     format='%(asctime)s [%(filename)s:%(lineno)d] %(message)s',
@@ -31,6 +33,7 @@ def clean_text(data_list):  # make sure to force string as list when running one
         clean_data_list.append(text)
     return(clean_data_list)
 
+
 # vectorize your data and create a sparse matrix
 def sparse_hot_encoder(data_list, vocabulary=None):
     log.info('running sparse matrix tranformation...')
@@ -45,9 +48,10 @@ def sparse_hot_encoder(data_list, vocabulary=None):
     vocabulary = list(np.asarray(vectorizer.get_feature_names()))
     return doc_words, vocabulary
 
+
 # import anchor words as ordereddict
 def set_anchor_words(anchor_path):
     "import and parse anchor words"
     with open(anchor_path) as handle:
-        anchor_dict = json.load(handle.read(), object_pairs_hook=OrderedDict)
+        anchor_dict = json.load(handle, object_pairs_hook=OrderedDict)
     return(anchor_dict)

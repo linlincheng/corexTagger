@@ -35,7 +35,7 @@ class modelTrainer(ABC):
         #self.file_path = None
 
     @abstractmethod
-    def train_model(self, print_words):
+    def train_model(self):
         return
 
     # Print all topics from the CorEx topic model
@@ -94,9 +94,9 @@ class semiSupervisedTrainer(modelTrainer):
     """train your wicked semi supervised corex model"""
     def __init__(
         self, words, doc_words,
-        n_topic=50, save_model=True, 
-        model_directory='model/', print_words=True, 
-        anchor_strengh=6, anchor_path='../anchor_words.json'
+        n_topic=50, save_model=True,
+        model_directory='model/', print_words=True,
+        anchor_strength=6, anchor_path='./anchor_words.json'
                  ):
         log.info('Initializing semiSupervisedTrainer class')
         modelTrainer.__init__(
@@ -115,7 +115,7 @@ class semiSupervisedTrainer(modelTrainer):
         anchor_words = list(self.anchor_dict.values())
         # train model
         topic_model = ct.Corex(n_hidden=self.n_topic, words=self.words, max_iter=200, verbose=False, seed=1)
-        topic_model.fit(self.doc_words, words=self.words, anchors=anchor_words, anchor_strength=self.anchor_level)
+        topic_model.fit(self.doc_words, words=self.words, anchors=anchor_words, anchor_strength=self.anchor_strength)
         # save to class
         self.topic_model = topic_model
         if self.print_words:
