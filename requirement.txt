@@ -9,5 +9,6 @@ scipy==1.4.1
 corextopic==1.0.5
 numpy==1.18.1
 nltk==3.4.5
+collection
 pickle
 datetime
