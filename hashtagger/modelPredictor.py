@@ -1,13 +1,18 @@
 import pandas as pd
 import logging
-from hashtagger.utils.funcs import clean_text, sparse_hot_encoder
+import os
+import numpy as np
+from corextopic import corextopic as ct
+from corextopic import vis_topic as vt
+from hashtagger.utils.funcs import clean_text, sparse_hot_encoder, set_anchor_words
 
 logging.basicConfig(
     format='%(asctime)s [%(filename)s:%(lineno)d] %(message)s',
     datefmt='%d-%m-%Y:%H:%M:%S',
     level=logging.INFO
     )
-log = logging.getLogger('modelPredictor)
+log = logging.getLogger('modelPredictor')
+
 
 class modelPredictor():
     "modelPredictors predict your tag for you"
@@ -24,29 +29,30 @@ class modelPredictor():
 
     def preprocess_text(self):
         clean_text_list = clean_text(self.text_data)
-        self.doc_words = sparse_hot_encoder(clean_text_list, vocabulary=self.vocabulary)
+        clean_text_list = np.asarray(clean_text_list)
+        self.doc_words, _ = sparse_hot_encoder(clean_text_list, vocabulary=self.vocabulary)
 
     def load_model_object(self):
-        model_object_path = sorted(os.listdir(self.model_dirctory))[0]
+        model_object_path = self.model_directory+'/'+sorted(os.listdir(self.model_directory))[-1]
         # load model
         model_file_name = model_object_path+'/model'
         self.topic_model = ct.load(filename=model_file_name)
         # load vocabulary
         self.vocabulary = ct.load(filename=model_object_path+'/words')
         # load anchor_words
-        self.anchor_words = _set_anchor_words(anchor_path=model_object_path)
+        self.anchor_dict = ct.load(filename=model_object_path+'/anchor_words')
 
     def predict_tags(self):
         # run import and preprocessing steps
         self.load_model_object()
         self.preprocess_text()
         # predict
-        corex_doc_labels = self.topic_model.transform(self.doc_word, details=False)
+        print(type(self.doc_words))
+        corex_doc_labels = self.topic_model.transform(self.doc_words, details=False)
         # return labels
         # process doc_label
         predicted_tags = self._process_doc_labels(doc_labels=corex_doc_labels)
-        #self.anchor_dict.keys().index()
-        log.info('Predicted tags: {}'.format(', '.join(predicted_tags)))
+        #log.info('Predicted tags: {}'.format(', '.join(predicted_tags)))
         return(predicted_tags)
 
     def _process_doc_labels(self, doc_labels):

@@ -2,5 +2,7 @@
     "inflight_meals" : ["serve", "meal", "breakfast"],
     "business_class" : ["business", "lounge", "bed"],
     "seats" : ["seat", "recline"],
-    "inflight_entertainment" : ["tv", "screen"]
+    "inflight_entertainment" : ["tv", "screen"],
+    "placeholder1": ["delay"],
+    "placeholder2": ["luggage"]
 }
