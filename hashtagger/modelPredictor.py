@@ -29,7 +29,6 @@ class modelPredictor():
 
     def preprocess_text(self):
         clean_text_list = clean_text(self.text_data)
-        clean_text_list = np.asarray(clean_text_list)
         self.doc_words, _ = sparse_hot_encoder(clean_text_list, vocabulary=self.vocabulary)
 
     def load_model_object(self):
@@ -47,7 +46,6 @@ class modelPredictor():
         self.load_model_object()
         self.preprocess_text()
         # predict
-        print(type(self.doc_words))
         corex_doc_labels = self.topic_model.transform(self.doc_words, details=False)
         # return labels
         # process doc_label
