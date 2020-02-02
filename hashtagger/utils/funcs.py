@@ -28,7 +28,7 @@ def clean_text(data_list):  # make sure to force string as list when running one
     for text in data_list:
         # lemmatize, lower case and remove digits
         #  remove punctuations and tokenize
-        text.translate(str.maketrans('', '', string.punctuation)).lower()
+        text = text.translate(str.maketrans('', '', string.punctuation)).lower()
         processed_text = lemmatize_sentence(sentence=text)
         clean_data_list.append(processed_text)
     return(clean_data_list)

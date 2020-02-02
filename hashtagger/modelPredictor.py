@@ -29,6 +29,7 @@ class modelPredictor():
 
     def preprocess_text(self):
         clean_text_list = clean_text(self.text_data)
+        print(clean_text_list)
         self.doc_words, _ = sparse_hot_encoder(clean_text_list, vocabulary=self.vocabulary)
 
     def load_model_object(self):

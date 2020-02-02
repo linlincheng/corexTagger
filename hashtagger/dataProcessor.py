@@ -47,6 +47,6 @@ class dataProcessor():
         clean_text_list = clean_text(data_list=text_list)
         # get sparse matrix
         self.doc_words, self.vocabulary = sparse_hot_encoder(
-                                                clean_text_list, 
+                                                clean_text_list,
                                                 vocabulary=self.vocabulary
                                                     )
