@@ -3,6 +3,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 import scipy.sparse as ss
 import string
 import logging
+import numpy as np
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import RegexpTokenizer
 
@@ -40,7 +41,9 @@ def sparse_hot_encoder(data_list, vocabulary=None):
     #  convert to sparse matrix
     doc_words = ss.csr_matrix(doc_words)
     log.info('doc_word shape: {}'.format(doc_words.shape))
-    return(doc_words)
+    #  get known vocabulary list
+    vocabulary = list(np.asarray(vectorizer.get_feature_names()))
+    return doc_words, vocabulary
 
 # import anchor words as ordereddict
 def set_anchor_words(anchor_path):

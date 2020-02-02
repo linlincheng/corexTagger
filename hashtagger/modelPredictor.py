@@ -9,14 +9,14 @@ logging.basicConfig(
     )
 log = logging.getLogger('modelPredictor)
 
-class modelPreditor():
+class modelPredictor():
     "modelPredictors predict your tag for you"
     def __init__(self, text_data, model_directory='./model'):
         # check text_data class
         if isinstance(text_data, str):
             text_data = [text_data]
         self.text_data = text_data
-        self.model_dirctory = model_directory
+        self.model_directory = model_directory
         self.doc_words = None
         self.vocabulary = None
         self.topic_model = None
