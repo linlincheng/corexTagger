@@ -3,7 +3,6 @@ import logging
 from corextopic import corextopic as ct
 from corextopic import vis_topic as vt
 import pickle
-import numpy as numpy
 #from nltk.tokenize import RegexpTokenizer
 from hashtagger.utils.funcs import clean_text, sparse_hot_encoder
 
@@ -46,7 +45,7 @@ class dataProcessor():
         # preprocess text
         clean_text_list = clean_text(data_list=text_list)
         # get sparse matrix
-        self.doc_words = sparse_hot_encoder(clean_text_list, vocabulary=self.vocabulary)
-
-    def get_vocab(self, vectorizer):
-        self.vocabulary = list(np.asarray(vectorizer.get_feature_names()))
+        self.doc_words, self.vocabulary = sparse_hot_encoder(
+                                                clean_text_list, 
+                                                vocabulary=self.vocabulary
+                                                    )
