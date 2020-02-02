@@ -40,6 +40,7 @@ class dataProcessor():
         return(text_list)
 
     def get_text_data(self):
+        log.info('Selecting text field...')
         # import data and select text field
         text_list = self.select_text_response()
         # preprocess text
