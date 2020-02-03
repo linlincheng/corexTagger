@@ -26,30 +26,32 @@ DataProcessor.get_text_data()
 
 
 ### train unsupervised version for anchor words inspirations
-from hashtagger.modelTrainer import unSupervisedTrainer
+```from hashtagger.modelTrainer import unSupervisedTrainer
 unSupervisedTrainer = unSupervisedTrainer(words=DataProcessor.vocabulary,doc_words=DataProcessor.doc_words, n_topic=20, save_model=True, model_directory='model/', print_words=True)
 unSupervisedTrainer.train_model()
 unSupervisedTrainer.save_model_object()
+```
 
 ### start building up your anchor words, try out Semisupervised version 
 ### with anchor_words (your domain expertise) injections;
 ### Take printed outputs, edit your anchor_words.json, and repeat the first step
-from hashtagger.modelTrainer import semiSupervisedTrainer
+```from hashtagger.modelTrainer import semiSupervisedTrainer
 SemiSupervisedTrainer = semiSupervisedTrainer(words=DataProcessor.vocabulary,doc_words=DataProcessor.doc_words, n_topic=20, save_model=True, model_directory='model/', print_words=True, anchor_path='./anchor_words.json')
 SemiSupervisedTrainer.train_model()
 SemiSupervisedTrainer.save_model_object()
+```
 
-See new_playground.ipynb for more details.
+See `new_playground.ipynb` for more details.
 
 
 To test drive the repo with appropirate env setup:
 
-do: `test_run_interactive.sh`
+do: `test_run_jupyter.sh`
 to access jupyter via docker.
 
 Note:
 
-This is a WIP and many parts may be still under test and development. Currently only local versions work. More to come soon!
+This is a WIP and many parts may be still under test and development.
 
 
 TODO:
