@@ -32,9 +32,9 @@ unSupervisedTrainer.train_model()
 unSupervisedTrainer.save_model_object()
 ```
 
-### start building up your anchor words, try out Semisupervised version 
-### with anchor_words (your domain expertise) injections;
-### Take printed outputs, edit your anchor_words.json, and repeat the first step
+
+### train semi-supervised version:
+#### Take printed outputs, edit your anchor_words.json, and repeat the first step
 ```from hashtagger.modelTrainer import semiSupervisedTrainer
 SemiSupervisedTrainer = semiSupervisedTrainer(words=DataProcessor.vocabulary,doc_words=DataProcessor.doc_words, n_topic=20, save_model=True, model_directory='model/', print_words=True, anchor_path='./anchor_words.json')
 SemiSupervisedTrainer.train_model()
