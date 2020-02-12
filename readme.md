@@ -47,7 +47,7 @@ See `new_playground.ipynb` for more details.
 To test drive the repo with appropirate env setup:
 
 do: `test_run_jupyter.sh`
-to access jupyter via docker.
+to access jupyter via docker. Note: dockerfile under testing
 
 Note:
 
